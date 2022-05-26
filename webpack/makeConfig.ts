@@ -9,6 +9,7 @@ import type {
 } from "webpack";
 import type { Configuration as DevServerConfiguration } from "webpack-dev-server";
 const ansis = require("ansis");
+const BrowserSyncPlugin = require("browser-sync-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 const PugPlugin = require("pug-plugin");
@@ -19,20 +20,27 @@ type Entry = Configuration["entry"];
 type Optimization = Configuration["optimization"];
 
 const IS_DEVELOP = process.env.MODE === "development";
+const IS_BROWSER_SYNC = process.env.SERVER === "browserSync";
+const IS_DEV_SERVER = process.env.SERVER === "webpack";
+const IS_SERVE = IS_DEV_SERVER || IS_BROWSER_SYNC;
 const mode = IS_DEVELOP ? "development" : "production";
 console.log(ansis.blue("making webpack config"));
 console.log(ansis.blue("mode:"), ansis.bgMagenta(mode));
+if (IS_SERVE) {
+  console.log(ansis.blue("server:"), ansis.bgMagenta(process.env.SERVER));
+}
 //
 export const makeConfig = (props: ConfigProps): Configuration => {
   //
   return {
+    watch: IS_BROWSER_SYNC,
     context: process.cwd(),
     mode,
     devtool: IS_DEVELOP ? "inline-source-map" : false,
     entry: makeEntry(props),
     plugins: makePlugins(props),
     module: makeModule(props),
-    devServer: makeDevServer(props),
+    devServer: IS_DEV_SERVER ? makeDevServer(props) : undefined,
     output: makeOutput(props.output),
     optimization: makeOptimization(),
     resolve: {
@@ -102,8 +110,20 @@ const makeOutput = (path: string): Output => {
   };
 };
 
-const makePlugins = ({ copy }: ConfigProps): WebpackPluginInstance[] => {
+const makePlugins = ({ copy, server }: ConfigProps): WebpackPluginInstance[] => {
+  const { root, port } = server;
+  const browserSync = IS_BROWSER_SYNC
+    ? [
+        new BrowserSyncPlugin({
+          host: "localhost",
+          port: port ?? 9000,
+          server: { baseDir: [root] },
+          open: false,
+        }),
+      ]
+    : [];
   return [
+    ...browserSync,
     new PugPlugin({
       pretty: true,
       modules: [PugPlugin.extractCss({ test: /\.(css|less|sass|scss)$/ })],
