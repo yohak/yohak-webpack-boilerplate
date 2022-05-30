@@ -30,8 +30,29 @@ if (IS_SERVE) {
   console.log(ansis.blue("server:"), ansis.bgMagenta(process.env.SERVER));
 }
 //
-export const makeConfig = (props: ConfigProps): Configuration => {
-  //
+export const makeConfig = (primary: ConfigProps, ...rest: ConfigProps[]): Configuration => {
+  if (rest.length === 0) {
+    return makeSingleConfig(primary);
+  } else {
+    const allProps: ConfigProps[] = [primary, ...rest];
+    allProps.forEach((props: ConfigProps) => {
+      if (!props.id) throw new Error("multiple configs require id at each ");
+    });
+    //
+    const configID = process.env.CONFIG;
+    if (!configID) {
+      console.log(ansis.red(`no config id found at process, so building`), ansis.bgRed(primary.id));
+      return makeSingleConfig(primary);
+    }
+    //
+    console.log(ansis.blue("config:"), ansis.bgMagenta(configID));
+    const targetProps: ConfigProps | undefined = allProps.find((config) => config.id === configID);
+    if (!targetProps) throw new Error(`not found config: ${configID}`);
+    return makeSingleConfig(targetProps);
+  }
+};
+//
+const makeSingleConfig = (props: ConfigProps): Configuration => {
   return {
     watch: IS_BROWSER_SYNC,
     context: process.cwd(),
@@ -101,7 +122,7 @@ const makeEntryFromConf = ({ files, dest, src }: CompileConf, output: string): E
 
 const makeOutput = (path: string): Output => {
   if (path === process.cwd()) {
-    throw Error("DO NOT SET output path as cwd");
+    throw new Error("DO NOT SET output path as cwd");
   }
   return {
     path,

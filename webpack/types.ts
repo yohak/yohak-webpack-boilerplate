@@ -1,4 +1,5 @@
 export type ConfigProps = {
+  id?: string;
   output: string;
   server: {
     root: string;
@@ -17,6 +18,7 @@ export type ConfigProps = {
     to: string;
   }[];
 };
+
 export type CompileConf = {
   src: string;
   dest: string;
