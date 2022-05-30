@@ -4,6 +4,9 @@ export type ConfigProps = {
     root: string;
     port?: number;
     watch: string;
+    browserSync?: {
+      middleware?: any[];
+    };
   };
   pug?: PugConf;
   less?: CompileConf;

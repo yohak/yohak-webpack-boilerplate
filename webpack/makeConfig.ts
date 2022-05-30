@@ -112,6 +112,7 @@ const makeOutput = (path: string): Output => {
 
 const makePlugins = ({ copy, server }: ConfigProps): WebpackPluginInstance[] => {
   const { root, port } = server;
+  //
   const browserSync = IS_BROWSER_SYNC
     ? [
         new BrowserSyncPlugin({
@@ -119,9 +120,11 @@ const makePlugins = ({ copy, server }: ConfigProps): WebpackPluginInstance[] => 
           port: port ?? 9000,
           server: { baseDir: [root] },
           open: false,
+          middleware: server?.browserSync?.middleware ?? [],
         }),
       ]
     : [];
+  //
   return [
     ...browserSync,
     new PugPlugin({
