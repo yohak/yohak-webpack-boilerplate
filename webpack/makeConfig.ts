@@ -14,6 +14,7 @@ const CopyPlugin = require("copy-webpack-plugin");
 const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 const PugPlugin = require("pug-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
+const LiveReloadPlugin = require("webpack-livereload-plugin");
 const WebpackBar = require("webpackbar");
 type Output = Configuration["output"];
 type Entry = Configuration["entry"];
@@ -134,7 +135,7 @@ const makeOutput = (path: string): Output => {
 const makePlugins = ({ copy, server }: ConfigProps): WebpackPluginInstance[] => {
   const { root, port } = server;
   //
-  const browserSync = IS_BROWSER_SYNC
+  const browserSync: WebpackPluginInstance[] = IS_BROWSER_SYNC
     ? [
         new BrowserSyncPlugin({
           host: "localhost",
@@ -146,8 +147,14 @@ const makePlugins = ({ copy, server }: ConfigProps): WebpackPluginInstance[] => 
       ]
     : [];
   //
+  const liveReload: WebpackPluginInstance[] = !!server.liveReloadPlugin
+    ? [new LiveReloadPlugin({ delay: 100, compareHash: false })]
+    : [];
+
+  //
   return [
     ...browserSync,
+    ...liveReload,
     new PugPlugin({
       pretty: true,
       modules: [PugPlugin.extractCss({ test: /\.(css|less|sass|scss)$/ })],

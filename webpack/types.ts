@@ -2,8 +2,9 @@ export type ConfigProps = {
   id?: string;
   output: string;
   server: {
-    root: string;
+    root?: string;
     port?: number;
+    liveReloadPlugin?: boolean;
     watch: string;
     browserSync?: {
       middleware?: any[];
