@@ -10,7 +10,9 @@ import type {
 import type { Configuration as DevServerConfiguration } from "webpack-dev-server";
 const ansis = require("ansis");
 const BrowserSyncPlugin = require("browser-sync-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 const PugPlugin = require("pug-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
@@ -128,33 +130,35 @@ const makeOutput = (path: string): Output => {
   return {
     path,
     publicPath: "/",
-    clean: path !== process.cwd(),
   };
 };
 
-const makePlugins = ({ copy, server }: ConfigProps): WebpackPluginInstance[] => {
+const makePlugins = ({ copy, server, clean }: ConfigProps): WebpackPluginInstance[] => {
   const { root, port } = server;
   //
-  const browserSync: WebpackPluginInstance[] = IS_BROWSER_SYNC
-    ? [
-        new BrowserSyncPlugin({
-          host: "localhost",
-          port: port ?? 9000,
-          server: { baseDir: [root] },
-          open: false,
-          middleware: server?.browserSync?.middleware ?? [],
-        }),
-      ]
-    : [];
+  const browserSync = IS_BROWSER_SYNC
+    ? new BrowserSyncPlugin({
+        host: "localhost",
+        port: port ?? 9000,
+        server: { baseDir: [root] },
+        open: false,
+        middleware: server?.browserSync?.middleware ?? [],
+      })
+    : undefined;
   //
-  const liveReload: WebpackPluginInstance[] = !!server.liveReloadPlugin
-    ? [new LiveReloadPlugin({ delay: 100, compareHash: false })]
-    : [];
+  const liveReload = !!server.liveReloadPlugin
+    ? new LiveReloadPlugin({ delay: 100, compareHash: false })
+    : undefined;
 
   //
   return [
-    ...browserSync,
-    ...liveReload,
+    browserSync,
+    liveReload,
+    new CleanWebpackPlugin({
+      verbose: clean?.verbose === undefined ? false : clean.verbose,
+      dry: clean?.dry === undefined ? false : clean.dry,
+      cleanOnceBeforeBuildPatterns: clean?.paths,
+    }),
     new PugPlugin({
       pretty: true,
       modules: [PugPlugin.extractCss({ test: /\.(css|less|sass|scss)$/ })],
@@ -163,7 +167,7 @@ const makePlugins = ({ copy, server }: ConfigProps): WebpackPluginInstance[] => 
       patterns: copy,
     }),
     new WebpackBar(),
-  ];
+  ].filter((item) => !!item);
 };
 
 const loadPugData = ({ data, src }: PugConf): any => {
@@ -259,6 +263,7 @@ const makeOptimization = (): Optimization => {
   return {
     minimizer: [
       new TerserPlugin(),
+      new CssMinimizerPlugin(),
       new ImageMinimizerPlugin({
         minimizer: {
           implementation: ImageMinimizerPlugin.squooshMinify,

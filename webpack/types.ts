@@ -1,6 +1,11 @@
 export type ConfigProps = {
   id?: string;
   output: string;
+  clean?: {
+    paths?: string[];
+    verbose?: boolean;
+    dry?: boolean;
+  };
   server: {
     root?: string;
     port?: number;
