@@ -10,9 +10,15 @@ module.exports = {
     "at-rule-no-unknown": null,
     "scss/at-rule-no-unknown": true,
     "rule-empty-line-before": ["always", { except: ["first-nested"] }],
-    "no-descending-specificity": false,
+    "no-descending-specificity": null,
     "color-hex-length": "long",
-    "at-rule-empty-line-before": ["always", { except: ["after-same-name", "first-nested"] }],
+    "at-rule-empty-line-before": [
+      "always",
+      {
+        except: ["after-same-name", "first-nested"],
+        ignoreAtRules: ["mixin", "function"],
+      },
+    ],
     "scss/at-use-no-unnamespaced": true,
   },
 };

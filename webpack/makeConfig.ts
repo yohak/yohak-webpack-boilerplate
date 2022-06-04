@@ -1,5 +1,6 @@
 import { CompileConf, ConfigProps, PugConf } from "./types";
 import { join, relative } from "path";
+import { inspect } from "util";
 import type {
   Configuration,
   WebpackPluginInstance,
@@ -25,6 +26,7 @@ type Optimization = Configuration["optimization"];
 const IS_DEVELOP = process.env.MODE === "development";
 const IS_BROWSER_SYNC = process.env.SERVER === "browserSync";
 const IS_DEV_SERVER = process.env.SERVER === "webpack";
+const IS_LOG_WEBPACK = process.env.LOG === "webpack";
 const IS_SERVE = IS_DEV_SERVER || IS_BROWSER_SYNC;
 const mode = IS_DEVELOP ? "development" : "production";
 console.log(ansis.blue("making webpack config"));
@@ -56,7 +58,7 @@ export const makeConfig = (primary: ConfigProps, ...rest: ConfigProps[]): Config
 };
 //
 const makeSingleConfig = (props: ConfigProps): Configuration => {
-  return {
+  const result: Configuration = {
     watch: IS_BROWSER_SYNC,
     context: process.cwd(),
     mode,
@@ -79,6 +81,10 @@ const makeSingleConfig = (props: ConfigProps): Configuration => {
       modulesSpace: 0,
     },
   };
+  if (IS_LOG_WEBPACK) {
+    console.log(inspect({ ...result, plugins: "@@OMITTED@@" }, false, null, true));
+  }
+  return result;
 };
 
 const makeDevServer = ({ server }: ConfigProps): DevServerConfiguration => {
