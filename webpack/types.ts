@@ -2,6 +2,7 @@ export type ConfigProps = {
   id?: string;
   output: string;
   clean?: {
+    run?: boolean;
     paths?: string[];
     verbose?: boolean;
     dry?: boolean;

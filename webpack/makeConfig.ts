@@ -139,7 +139,7 @@ const makeOutput = (path: string): Output => {
   };
 };
 
-const makePlugins = ({ copy, server, clean }: ConfigProps): WebpackPluginInstance[] => {
+const makePlugins = ({ copy, server, clean, output }: ConfigProps): WebpackPluginInstance[] => {
   const { root, port } = server;
   //
   const browserSync = IS_BROWSER_SYNC
@@ -163,7 +163,7 @@ const makePlugins = ({ copy, server, clean }: ConfigProps): WebpackPluginInstanc
     new CleanWebpackPlugin({
       verbose: clean?.verbose === undefined ? false : clean.verbose,
       dry: clean?.dry === undefined ? false : clean.dry,
-      cleanOnceBeforeBuildPatterns: clean?.paths,
+      cleanOnceBeforeBuildPatterns: makeCleanLocationPattern(clean, output),
     }),
     new PugPlugin({
       pretty: true,
@@ -277,4 +277,22 @@ const makeOptimization = (): Optimization => {
       }),
     ],
   };
+};
+
+const makeCleanLocationPattern = (
+  clean: ConfigProps["clean"] | undefined,
+  output: string
+): string[] | undefined => {
+  if (!clean) return undefined;
+  if (clean.run === false) return [];
+
+  clean.paths?.forEach((path) => {
+    const relativePath = relative(output, path);
+    const test = /^\.\./.test(relativePath);
+    if (test) {
+      throw new Error(`Should not delete outside of the output directory ${path}`);
+    }
+  });
+
+  return clean.paths;
 };
