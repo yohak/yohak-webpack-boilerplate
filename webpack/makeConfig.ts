@@ -1,6 +1,7 @@
 import { CompileConf, ConfigProps, PugConf } from "./types";
 import { join, relative } from "path";
 import { inspect } from "util";
+import type { Options as BrowserSyncOptions } from "browser-sync";
 import type {
   Configuration,
   WebpackPluginInstance,
@@ -21,7 +22,7 @@ const LiveReloadPlugin = require("webpack-livereload-plugin");
 const WebpackBar = require("webpackbar");
 type Output = Configuration["output"];
 type Entry = Configuration["entry"];
-type Optimization = Configuration["optimization"];
+type Optimization = NonNullable<Configuration["optimization"]>;
 
 const IS_DEVELOP = process.env.MODE === "development";
 const IS_BROWSER_SYNC = process.env.SERVER === "browserSync";
@@ -68,7 +69,7 @@ const makeSingleConfig = (props: ConfigProps): Configuration => {
     module: makeModule(props),
     devServer: IS_DEV_SERVER ? makeDevServer(props) : undefined,
     output: makeOutput(props.output),
-    optimization: makeOptimization(),
+    optimization: makeOptimization(props.optimization),
     resolve: {
       extensions: [".ts", ".tsx", ".js", ".json"],
     },
@@ -148,7 +149,7 @@ const makePlugins = ({ copy, server, clean, output }: ConfigProps): WebpackPlugi
         port: port ?? 9000,
         server: { baseDir: [root] },
         open: false,
-        middleware: server?.browserSync?.middleware ?? [],
+        ...server.browserSync,
       })
     : undefined;
   //
@@ -265,18 +266,24 @@ const makeLessLoadRule = (): RuleSetRule => {
   };
 };
 
-const makeOptimization = (): Optimization => {
-  return {
-    minimizer: [
-      new TerserPlugin(),
-      new CssMinimizerPlugin(),
+const makeOptimization = (optimization: ConfigProps["optimization"]): Optimization => {
+  const minimizer: Optimization["minimizer"] = [];
+  if (!(optimization && optimization.minifyJs === false)) {
+    minimizer.push(new TerserPlugin());
+  }
+  if (!(optimization && optimization.minifyCss === false)) {
+    minimizer.push(new CssMinimizerPlugin());
+  }
+  if (!(optimization && optimization.minifyImages === false)) {
+    minimizer.push(
       new ImageMinimizerPlugin({
         minimizer: {
           implementation: ImageMinimizerPlugin.squooshMinify,
         },
-      }),
-    ],
-  };
+      })
+    );
+  }
+  return { minimizer };
 };
 
 const makeCleanLocationPattern = (

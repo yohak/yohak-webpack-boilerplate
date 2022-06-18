@@ -16,9 +16,11 @@ module.exports = {
       "always",
       {
         except: ["after-same-name", "first-nested"],
+        ignore: ["after-comment"],
         ignoreAtRules: ["mixin", "function"],
       },
     ],
     "scss/at-use-no-unnamespaced": true,
+    "scss/double-slash-comment-whitespace-inside": null,
   },
 };
