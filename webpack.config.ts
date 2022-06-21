@@ -1,6 +1,8 @@
 import { makeConfig } from "./webpack/makeConfig";
 import { join } from "path";
 //
+// 本ファイル内のパスの記述は原則マシン内の絶対パス基準で統一する
+// そのため `process.cwd()` を最初に定義しておくと便利
 const CWD = process.cwd();
 const DIR_SRC = join(CWD, "src");
 const DIR_PUBLIC = join(CWD, "public");

@@ -1,13 +1,12 @@
 import { CompileConf, ConfigProps, PugConf } from "./types";
 import { join, relative } from "path";
 import { inspect } from "util";
-import type { Options as BrowserSyncOptions } from "browser-sync";
 import type {
   Configuration,
-  WebpackPluginInstance,
-  ModuleOptions,
   EntryObject,
+  ModuleOptions,
   RuleSetRule,
+  WebpackPluginInstance,
 } from "webpack";
 import type { Configuration as DevServerConfiguration } from "webpack-dev-server";
 const ansis = require("ansis");
