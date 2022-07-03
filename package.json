@@ -8,7 +8,9 @@
     "webpack": "MODE=development npx webpack",
     "serve": "MODE=development SERVER=browserSync npx webpack",
     "serve-hot": "MODE=development SERVER=webpack npx webpack serve",
-    "build": "npx webpack"
+    "build": "npx webpack",
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "devDependencies": {
     "@prettier/plugin-pug": "^2.0.0",
@@ -24,6 +26,7 @@
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.7.1",
     "css-minimizer-webpack-plugin": "^4.0.0",
+    "dotenv": "^16.0.1",
     "eslint": "^8.16.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.26.0",
@@ -31,6 +34,7 @@
     "image-minimizer-webpack-plugin": "^3.2.3",
     "jest": "^28.1.0",
     "jest-environment-jsdom": "^28.1.1",
+    "jest-location-mock": "^1.0.9",
     "less": "^4.1.2",
     "less-loader": "^11.0.0",
     "prettier": "^2.6.2",

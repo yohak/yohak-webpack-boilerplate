@@ -5,4 +5,6 @@ module.exports = {
     "^.+\\.(ts|tsx)$": "ts-jest",
   },
   testEnvironment: "jsdom",
+  setupFiles: ["<rootDir>/.jest/set-env-vars.js"],
+  setupFilesAfterEnv: ["<rootDir>/.jest/jest-setup.js"],
 };
