@@ -217,7 +217,7 @@ const makePugLoadRule = (pug: PugConf): RuleSetRule => {
         options: {
           method: "render",
           data: {
-            hash: "",
+            hash: IS_DEVELOP ? "" : "?" + new Date().valueOf().toString(),
             ...loadPugData(pug),
           },
         },
