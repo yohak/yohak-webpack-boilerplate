@@ -153,7 +153,7 @@ const makePlugins = ({ copy, server, clean, output }: ConfigProps): WebpackPlugi
     : undefined;
   //
   const liveReload = !!server.liveReloadPlugin
-    ? new LiveReloadPlugin({ delay: 100, compareHash: false })
+    ? new LiveReloadPlugin({ delay: 100, useCompilationHash: false })
     : undefined;
 
   //
