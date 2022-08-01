@@ -277,7 +277,14 @@ const makeOptimization = (optimization: ConfigProps["optimization"]): Optimizati
     minimizer.push(
       new ImageMinimizerPlugin({
         minimizer: {
-          implementation: ImageMinimizerPlugin.squooshMinify,
+          implementation: ImageMinimizerPlugin.imageminMinify,
+          options: {
+            plugins: [
+              ["gifsicle", { interlaced: true }],
+              ["mozjpeg", { quality: 80 }],
+              ["pngquant", { quality: [0.6, 0.8] }],
+            ],
+          },
         },
       })
     );
