@@ -86,7 +86,20 @@ export type ConfigProps = {
     /**
      * @default true
      */
-    minifyImages?: boolean;
+    minifyImages?:
+      | boolean
+      | {
+          /**
+           * 小数点ベースで0-1 のTuple
+           * @default [0.6, 0.8]
+           */
+          png?: [number, number];
+          /**
+           * 0-100
+           * @default 80
+           */
+          jpg?: number;
+        };
   };
 };
 

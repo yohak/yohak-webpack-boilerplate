@@ -274,6 +274,16 @@ const makeOptimization = (optimization: ConfigProps["optimization"]): Optimizati
     minimizer.push(new CssMinimizerPlugin());
   }
   if (!(optimization && optimization.minifyImages === false)) {
+    let jpgQuality = 80;
+    let pngQuality = [0.6, 0.8];
+    if (typeof optimization?.minifyImages === "object") {
+      if (optimization.minifyImages.jpg) {
+        jpgQuality = optimization.minifyImages.jpg;
+      }
+      if (optimization.minifyImages.png) {
+        pngQuality = optimization.minifyImages.png;
+      }
+    }
     minimizer.push(
       new ImageMinimizerPlugin({
         minimizer: {
@@ -281,8 +291,8 @@ const makeOptimization = (optimization: ConfigProps["optimization"]): Optimizati
           options: {
             plugins: [
               ["gifsicle", { interlaced: true }],
-              ["mozjpeg", { quality: 80 }],
-              ["pngquant", { quality: [0.6, 0.8] }],
+              ["mozjpeg", { quality: jpgQuality }],
+              ["pngquant", { quality: pngQuality }],
             ],
           },
         },
