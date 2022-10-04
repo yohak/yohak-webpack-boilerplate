@@ -17,8 +17,8 @@ module.exports = {
       "always",
       {
         except: ["after-same-name", "first-nested"],
-        ignore: ["after-comment", "before-comment"],
-        ignoreAtRules: ["mixin", "function"],
+        ignore: ["after-comment"],
+        ignoreAtRules: ["mixin", "function", "else"],
       },
     ],
     "scss/at-use-no-unnamespaced": true,
