@@ -23,7 +23,8 @@ http://localhost:9000/
 ```bash
 yarn build
 ```
-上記 `webpack` と同等かつ
+上記 `webpack` と同等かつ圧縮・難読化を行う。  
+圧縮設定は `webpack.config.ts` から変更可能。
 
 
 ## Git branches
