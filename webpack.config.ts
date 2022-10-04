@@ -43,7 +43,6 @@ export default makeConfig({
     dest: join(DIR_ASSETS, "js"),
     files: {
       "main.js": "main.ts",
-      "top.js": "top.ts",
     },
   },
   copy: [
