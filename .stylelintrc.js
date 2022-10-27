@@ -9,10 +9,11 @@ module.exports = {
   rules: {
     "comment-no-empty": null,
     "at-rule-no-unknown": null,
-    "scss/at-rule-no-unknown": true,
-    "rule-empty-line-before": ["always", { except: ["first-nested"] }],
     "no-descending-specificity": null,
     "no-empty-source": null,
+    "declaration-block-no-redundant-longhand-properties": null,
+    "scss/at-rule-no-unknown": true,
+    "rule-empty-line-before": ["always", { except: ["first-nested"] }],
     "color-hex-length": "long",
     "at-rule-empty-line-before": [
       "always",
