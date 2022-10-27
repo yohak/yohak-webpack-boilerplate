@@ -12,6 +12,7 @@ module.exports = {
     "scss/at-rule-no-unknown": true,
     "rule-empty-line-before": ["always", { except: ["first-nested"] }],
     "no-descending-specificity": null,
+    "no-empty-source": null,
     "color-hex-length": "long",
     "at-rule-empty-line-before": [
       "always",
