@@ -11,6 +11,7 @@ module.exports = {
     "at-rule-no-unknown": null,
     "no-descending-specificity": null,
     "no-empty-source": null,
+    "block-no-empty": null,
     "declaration-block-no-redundant-longhand-properties": null,
     "scss/at-rule-no-unknown": true,
     "rule-empty-line-before": ["always", { except: ["first-nested"] }],
