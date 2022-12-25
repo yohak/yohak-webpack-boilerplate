@@ -23,14 +23,6 @@ export default makeConfig({
       "sub.html": "sub.pug",
     },
   },
-  less: {
-    src: join(DIR_SRC, "less"),
-    dest: join(DIR_ASSETS, "css"),
-    files: {
-      "main.css": "main.less",
-      "top.css": "top.less",
-    },
-  },
   sass: {
     src: join(DIR_SRC, "sass"),
     dest: join(DIR_ASSETS, "css"),
