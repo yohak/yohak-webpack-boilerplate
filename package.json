@@ -5,10 +5,10 @@
   "author": "Satoshi Onoda",
   "license": "MIT",
   "scripts": {
-    "webpack": "MODE=development npx bundler/webpack",
-    "serve": "MODE=development SERVER=browserSync npx bundler/webpack",
-    "serve-hot": "MODE=development SERVER=webpack npx bundler/webpack serve",
-    "build": "npx bundler/webpack",
+    "webpack": "MODE=development npx webpack",
+    "serve": "MODE=development SERVER=browserSync npx webpack",
+    "serve-hot": "MODE=development SERVER=webpack npx webpack serve",
+    "build": "npx webpack",
     "test": "jest",
     "test:watch": "jest --watch",
     "webp": "node bundler/webp/index.mjs"

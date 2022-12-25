@@ -17,7 +17,7 @@ export default makeConfig({
   pug: {
     src: join(DIR_SRC, "pug"),
     dest: join(DIR_PUBLIC),
-    data: ["_include/settings.js", "_include/meta.js"],
+    data: [],
     files: {
       "index.html": "top.pug",
       "sub.html": "sub.pug",

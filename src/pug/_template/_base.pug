@@ -1,9 +1,9 @@
+include ../_include/meta
+include ../_include/variables
+
 -
   var bodyClasses = [];
-  var titleBase = 'YOHAK Boilerplate';
   var titleChild = '';
-  var TBD = '#TBD';
-  var BLANK = '_blank';
   var pageID = '';
   var lev = 0;
   var pathToRoot = '';
@@ -12,7 +12,7 @@
 block vars
 
 -
-  title = titleChild ? titleChild + ' | ' + titleBase : titleBase;
+  title = titleChild ? titleChild + ' | ' + meta.titleBase : meta.titleBase;
   bodyClasses.push(lev1ID);
   for(let i = 0; i < lev; i++){
     pathToRoot += '../';
@@ -34,18 +34,18 @@ html(lang="ja", xmlns:og="http://ogp.me/ns#")
     meta(name="format-detection", content="telephone=no")
     meta(name="viewport", content="width=device-width,initial-scale=1.0,minimum-scale=1.0")
     meta(name="description", content=`${meta.description}`)
-    meta(name="keywords", content=``)
+    meta(name="keywords", content="")
     link(href=`${pathToLibs}html5reset.css`, rel="stylesheet", type="text/css")
     link(href=`${pathToCSS}main.css${hash}`, rel="stylesheet", type="text/css")
     block links
 
-    meta(property="og:title", content=``)
-    meta(property="og:description", content=``)
-    meta(property="og:type", content=``)
-    meta(property="og:image", content=``)
+    meta(property="og:title", content="")
+    meta(property="og:description", content="")
+    meta(property="og:type", content="")
+    meta(property="og:image", content="")
     meta(property="og:image:width", content="1200")
     meta(property="og:image:height", content="630")
-    meta(property="og:url", content=``)
+    meta(property="og:url", content="")
     title= title
   body(class=bodyClasses)
     main
