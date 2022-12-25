@@ -1,4 +1,4 @@
-import { makeConfig } from "./webpack/makeConfig";
+import { makeConfig } from "./bundler/webpack/makeConfig";
 import { join } from "path";
 //
 // 本ファイル内のパスの記述は原則マシン内の絶対パス基準で統一する

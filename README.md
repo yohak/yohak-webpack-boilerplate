@@ -15,6 +15,10 @@
   * `prettier` : `js,jsx,ts,tsx,json,yaml,pug,scss,css,less`
 * テスト
   * jest
+* **[Experimental]** webpへの画像変換及びソース書き換え
+  * `bundler/webp/indx.mjs` 内に記述あり
+    * 現状でwebpackのプロセスとは独立しているので、独自に対象フォルダ・ファイルのパスを書き換える必要がある
+  * `yarn webp` で実行
 
 ## CLI コマンド
 `node.process.env` に変数を入れることで書き出し設定の切り替えを行っている
