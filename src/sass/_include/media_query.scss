@@ -1,0 +1,73 @@
+$-responsive-threshold1: 768px;
+$-responsive-threshold2: 1200px;
+
+@mixin lg {
+  @media screen and (min-width: #{$-responsive-threshold2 + 1}) {
+    @content;
+  }
+}
+
+@mixin md-lg {
+  @media screen and (min-width: #{$-responsive-threshold1 + 1}) {
+    @content;
+  }
+}
+
+@mixin md {
+  @media screen and (min-width: #{$-responsive-threshold1 + 1}) and (max-width: #{$-responsive-threshold2}) {
+    @content;
+  }
+}
+
+@mixin sm {
+  @media screen and (max-width: #{$-responsive-threshold1}) {
+    @content;
+  }
+}
+
+@mixin no-sm {
+  @include sm {
+    display: none !important;
+  }
+}
+
+@mixin no-md {
+  @include md {
+    display: none !important;
+  }
+}
+
+@mixin no-lg {
+  @include lg {
+    display: none !important;
+  }
+}
+
+@mixin make-switching-class {
+  .no-sm {
+    @include no-sm;
+  }
+
+  .no-md {
+    @include no-md;
+  }
+
+  .no-lg {
+    @include no-lg;
+  }
+
+  .sm-only {
+    @include no-lg;
+    @include no-md;
+  }
+
+  .lg-only {
+    @include no-sm;
+    @include no-md;
+  }
+
+  .md-only {
+    @include no-sm;
+    @include no-lg;
+  }
+}

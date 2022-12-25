@@ -1,0 +1,12 @@
+$path-to-img: "../images/";
+
+@mixin bg-lg($name, $bg-size: contain) {
+  background-image: url("../images/lg/#{$name}");
+  background-repeat: no-repeat;
+  background-size: $bg-size;
+}
+@mixin bg-sm($name, $bg-size: contain) {
+  background-image: url("../images/sm/#{$name}");
+  background-repeat: no-repeat;
+  background-size: $bg-size;
+}

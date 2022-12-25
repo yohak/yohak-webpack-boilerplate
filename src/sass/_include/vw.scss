@@ -1,0 +1,33 @@
+@use "sass:math";
+
+$-design-size-sm: 750;
+$-design-size-md: 1200;
+$-design-size-lg: 1366;
+
+@function lg($value) {
+  @if $value == 0 {
+    @return 0;
+  } @else {
+    @return math.div($value, $-design-size-lg) * 100vw;
+  }
+}
+
+@function md($value) {
+  @if $value == 0 {
+    @return 0;
+  } @else {
+    @return math.div($value, $-design-size-md) * 100vw;
+  }
+}
+
+@function sm($value) {
+  @if $value == 0 {
+    @return 0;
+  } @else {
+    @return math.div($value, $-design-size-sm) * 100vw;
+  }
+}
+
+@function lg-min($value) {
+  @return min(#{$value}px, #{lg($value)});
+}

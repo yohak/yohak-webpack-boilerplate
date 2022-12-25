@@ -1,0 +1,49 @@
+@use "./vw";
+
+@mixin abs($l: 0, $t: 0, $r: unset, $b: unset) {
+  position: absolute;
+  top: $t;
+  right: $r;
+  bottom: $b;
+  left: $l;
+}
+
+@mixin fixed($l: 0, $t: 0, $r: unset, $b: unset) {
+  position: fixed;
+  top: $t;
+  right: $r;
+  bottom: $b;
+  left: $l;
+}
+
+@mixin rect($w, $h) {
+  width: $w;
+  height: $h;
+}
+@mixin sq($v) {
+  width: $v;
+  height: $v;
+}
+
+@mixin fill-parent() {
+  width: 100%;
+  height: 100%;
+}
+
+@mixin min-height-svh($value: 100) {
+  min-height: #{$value}vh;
+  /* stylelint-disable-next-line */
+  min-height: #{$value}svh;
+}
+
+@mixin min-height-lvh($value: 100) {
+  min-height: #{$value}vh;
+  /* stylelint-disable-next-line */
+  min-height: #{$value}lvh;
+}
+
+@mixin min-height-dvh($value: 100) {
+  min-height: #{$value}vh;
+  /* stylelint-disable-next-line */
+  min-height: #{$value}dvh;
+}

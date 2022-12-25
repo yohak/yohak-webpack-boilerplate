@@ -27,7 +27,7 @@ export default makeConfig({
     src: join(DIR_SRC, "sass"),
     dest: join(DIR_ASSETS, "css"),
     files: {
-      "test01.css": "test01.scss",
+      "main.css": "main.scss",
     },
   },
   ts: {
