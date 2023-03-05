@@ -64,6 +64,7 @@
     "webpack": "^5.72.1",
     "webpack-cli": "^5.0.1",
     "webpack-dev-server": "^4.9.0",
+    "webpack-glsl-loader": "^1.0.1",
     "webpack-livereload-plugin": "github:satoshionoda/webpack-livereload-plugin#ignore-hash-comparison",
     "webpackbar": "^5.0.2"
   }

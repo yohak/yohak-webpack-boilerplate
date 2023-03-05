@@ -194,6 +194,7 @@ const makeModule = ({ pug, less, sass, ts }: ConfigProps): ModuleOptions => {
   less ? rules.push(makeLessLoadRule()) : "";
   sass ? rules.push(makeSassLoadRule()) : "";
   ts ? rules.push(makeTsLoadRule()) : "";
+  ts ? rules.push(makeGlslLoadRule()) : "";
   return { rules };
 };
 
@@ -205,6 +206,13 @@ const makeTsLoadRule = (): RuleSetRule => {
         loader: "ts-loader",
       },
     ],
+  };
+};
+
+const makeGlslLoadRule = (): RuleSetRule => {
+  return {
+    test: /\.glsl$/,
+    loader: "webpack-glsl-loader",
   };
 };
 
