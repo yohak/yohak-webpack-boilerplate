@@ -1,9 +1,5 @@
 module.exports = {
-  extends: [
-    "stylelint-config-standard-scss",
-    "stylelint-config-prettier-scss",
-    "stylelint-config-recess-order",
-  ],
+  extends: ["stylelint-config-standard-scss", "stylelint-config-recess-order"],
   ignoreFiles: [".git/**", "dist/**", "**/node_modules/**"],
   plugins: ["stylelint-scss", "stylelint-order"],
   rules: {
