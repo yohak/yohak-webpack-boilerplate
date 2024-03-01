@@ -1,4 +1,6 @@
 module.exports = {
+  plugins: ["@prettier/plugin-pug"],
+
   semi: true,
   trailingComma: "es5",
   singleQuote: false,
