@@ -14,8 +14,20 @@
     "webp": "node bundler/webp/index.mjs",
     "prepare": "husky",
     "lint": "eslint  --fix './src/**/*.{ts,tsx,js,jsx}'",
-    "fmt": "prettier --write './src/**/*.{ts,tsx,js,jsx,css,scss,pug}'"
-
+    "format": "prettier --write './src/**/*.{ts,tsx,js,jsx,css,scss,pug}'"
+  },
+  "lint-staged": {
+    "*.{pug,json}": [
+      "prettier --write"
+    ],
+    "*.{css,scss}": [
+      "stylelint --fix",
+      "prettier --write"
+    ],
+    "*.{ts,tsx,js,jsx,cjs,mjs}": [
+      "eslint  --fix",
+      "prettier --write"
+    ]
   },
   "devDependencies": {
     "@prettier/plugin-pug": "^3.0.0",
