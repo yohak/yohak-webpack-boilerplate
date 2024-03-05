@@ -11,7 +11,11 @@
     "build": "webpack",
     "test": "jest",
     "test:watch": "jest --watch",
-    "webp": "node bundler/webp/index.mjs"
+    "webp": "node bundler/webp/index.mjs",
+    "prepare": "husky",
+    "lint": "eslint  --fix --debug './src/**/*.{ts,tsx,js,jsx}'",
+    "fmt": "prettier --write './src/**/*.{ts,tsx,js,jsx,css,scss,pug}'"
+
   },
   "devDependencies": {
     "@prettier/plugin-pug": "^3.0.0",
@@ -34,6 +38,7 @@
     "eslint-plugin-import": "^2.28.0",
     "eslint-plugin-prettier": "^5.0.0",
     "glob": "^10.3.3",
+    "husky": "^9.0.11",
     "image-minimizer-webpack-plugin": "^4.0.0",
     "imagemin": "^8.0.1",
     "imagemin-gifsicle": "^7.0.0",
@@ -45,6 +50,7 @@
     "jest-location-mock": "^2.0.0",
     "less": "^4.2.0",
     "less-loader": "^12.2.0",
+    "lint-staged": "^15.2.2",
     "prettier": "^3.0.1",
     "pug-plugin": "^4.9.9",
     "sass": "^1.65.1",

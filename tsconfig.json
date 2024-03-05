@@ -16,7 +16,7 @@
     "noImplicitUseStrict": false,
     "noFallthroughCasesInSwitch": true,
     "strict": true,
-    "strictNullChecks": true,
+    "strictNullChecks": true
   },
   "exclude": ["node_modules"],
   "compileOnSave": false
