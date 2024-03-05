@@ -4,6 +4,14 @@
 
 ```bash
 pnpm install
+```
+
+## Huskey のセットアップ
+
+```bash
+# git が初期化されていなければ実行
+git init 
+# 以下はpnpm install 後に実行
 pnpm exec husky init
 echo "pnpm dlx lint-staged --verbose" > .husky/pre-commit
 ```
