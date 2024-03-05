@@ -4,6 +4,8 @@
 
 ```bash
 pnpm install
+pnpm exec husky init
+echo "pnpm dlx lint-staged --verbose" > .husky/pre-commit
 ```
 
 ## Scripts
