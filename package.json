@@ -13,7 +13,7 @@
     "test:watch": "jest --watch",
     "webp": "node bundler/webp/index.mjs",
     "prepare": "husky",
-    "lint": "eslint  --fix --debug './src/**/*.{ts,tsx,js,jsx}'",
+    "lint": "eslint  --fix './src/**/*.{ts,tsx,js,jsx}'",
     "fmt": "prettier --write './src/**/*.{ts,tsx,js,jsx,css,scss,pug}'"
 
   },
