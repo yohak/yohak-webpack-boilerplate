@@ -4,6 +4,8 @@
 **YOHAK 社内プロジェクトで使用するWebpack設定の基礎ファイル群**
 
 ### 採用技術
+* PNPM
+  * パッケージ管理
 * Webpack
   * TypeScript/Pug/Sass/Lessのコンパイル
   * ローカルサーバーはBrowserSyncとWebpackDevServer(HMR対応)の両方を使用可能
@@ -18,7 +20,7 @@
 * **[Experimental]** webpへの画像変換及びソース書き換え
   * `bundler/webp/indx.mjs` 内に記述あり
     * 現状でwebpackのプロセスとは独立しているので、独自に対象フォルダ・ファイルのパスを書き換える必要がある
-  * `yarn webp` で実行
+  * `pnpm webp` で実行
 
 ## CLI コマンド
 `node.process.env` に変数を入れることで書き出し設定の切り替えを行っている

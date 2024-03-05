@@ -2,18 +2,18 @@
 
 ## Install
 ```bash
-yarn install
+pnpm install
 ```
 
 ## Scripts
 ```bash
-yarn webpack
+pnpm webpack
 ```
 `public` にファイルを書き出す
 
 
 ```bash
-yarn serve
+pnpm serve
 ```
 上記 `webpack` に加えてbrowserSyncサーバーを起動する  
 確認用URLは以下  
@@ -21,7 +21,7 @@ http://localhost:9000/
 
 
 ```bash
-yarn build
+pnpm build
 ```
 上記 `webpack` と同等かつ圧縮・難読化を行う。  
 圧縮設定は `webpack.config.ts` から変更可能。
