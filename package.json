@@ -5,6 +5,7 @@
   "author": "Satoshi Onoda",
   "license": "MIT",
   "scripts": {
+    "prepare": "husky",
     "webpack": "MODE=development webpack",
     "serve": "MODE=development SERVER=browserSync webpack",
     "serve-hot": "MODE=development SERVER=webpack webpack serve",
@@ -12,9 +13,9 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "webp": "node bundler/webp/index.mjs",
-    "prepare": "husky",
-    "lint": "eslint  --fix './src/**/*.{ts,tsx,js,jsx}'",
-    "format": "prettier --write './src/**/*.{ts,tsx,js,jsx,css,scss,pug}'"
+    "stylelint": "stylelint  --fix './src/**/*.{css,scss}'",
+    "lint": "eslint  --fix './src/**/*.{ts,tsx,js,jsx,cjs,mjs}'",
+    "format": "prettier --write './src/**/*.{ts,tsx,js,jsx,cjs,mjs,css,scss,pug,php,json}'"
   },
   "lint-staged": {
     "*.{pug,json,php}": [
