@@ -1,3 +1,5 @@
+import ansis from "ansis";
+import { CleanWebpackPlugin } from "clean-webpack-plugin";
 import { CompileConf, ConfigProps, PugConf } from "./types";
 import { join, relative } from "path";
 import { inspect } from "util";
@@ -9,9 +11,7 @@ import type {
   WebpackPluginInstance,
 } from "webpack";
 import type { Configuration as DevServerConfiguration } from "webpack-dev-server";
-const ansis = require("ansis");
 const BrowserSyncPlugin = require("browser-sync-webpack-plugin");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
@@ -29,10 +29,11 @@ const IS_DEV_SERVER = process.env.SERVER === "webpack";
 const IS_LOG_WEBPACK = process.env.LOG === "webpack";
 const IS_SERVE = IS_DEV_SERVER || IS_BROWSER_SYNC;
 const mode = IS_DEVELOP ? "development" : "production";
+
 console.log(ansis.blue("making webpack config"));
 console.log(ansis.blue("mode:"), ansis.bgMagenta(mode));
 if (IS_SERVE) {
-  console.log(ansis.blue("server:"), ansis.bgMagenta(process.env.SERVER));
+  console.log(ansis.blue("server:"), ansis.bgMagenta(process.env.SERVER ?? "unknown"));
 }
 //
 export const makeConfig = (primary: ConfigProps, ...rest: ConfigProps[]): Configuration => {
@@ -46,7 +47,10 @@ export const makeConfig = (primary: ConfigProps, ...rest: ConfigProps[]): Config
     //
     const configID = process.env.CONFIG;
     if (!configID) {
-      console.log(ansis.red(`no config id found at process, so building`), ansis.bgRed(primary.id));
+      console.log(
+        ansis.red(`no config id found at process, so building`),
+        ansis.bgRed(primary.id ?? "unknown")
+      );
       return makeSingleConfig(primary);
     }
     //

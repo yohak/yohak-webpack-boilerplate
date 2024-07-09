@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
-    "target": "es6",
-    "module": "commonjs",
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "baseUrl": "./",
     "declaration": false,
     "removeComments": true,
     "noLib": false,
@@ -16,8 +18,19 @@
     "noImplicitUseStrict": false,
     "noFallthroughCasesInSwitch": true,
     "strict": true,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "lib": [
+      "ES5",
+      "ES6",
+      "DOM"
+    ]
   },
   "exclude": ["node_modules"],
-  "compileOnSave": false
+  "compileOnSave": false,
+  "ts-node": {
+    "esm": true,
+    "experimentalSpecifierResolution": "node"
+  }
 }
