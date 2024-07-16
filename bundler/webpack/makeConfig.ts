@@ -1,5 +1,10 @@
 import ansis from "ansis";
 import { CleanWebpackPlugin } from "clean-webpack-plugin";
+import CopyPlugin from "copy-webpack-plugin";
+import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
+import ImageMinimizerPlugin from "image-minimizer-webpack-plugin";
+import TerserPlugin from "terser-webpack-plugin";
+import WebpackBar from "webpackbar";
 import { CompileConf, ConfigProps, PugConf } from "./types";
 import { join, relative } from "path";
 import { inspect } from "util";
@@ -12,13 +17,10 @@ import type {
 } from "webpack";
 import type { Configuration as DevServerConfiguration } from "webpack-dev-server";
 const BrowserSyncPlugin = require("browser-sync-webpack-plugin");
-const CopyPlugin = require("copy-webpack-plugin");
-const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
-const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 const PugPlugin = require("pug-plugin");
-const TerserPlugin = require("terser-webpack-plugin");
 const LiveReloadPlugin = require("webpack-livereload-plugin");
-const WebpackBar = require("webpackbar");
+
+// const WebpackBar = require("webpackbar");
 type Output = Configuration["output"];
 type Entry = Configuration["entry"];
 type Optimization = NonNullable<Configuration["optimization"]>;
@@ -174,7 +176,7 @@ const makePlugins = ({ copy, server, clean, output }: ConfigProps): WebpackPlugi
       modules: [PugPlugin.extractCss({ test: /\.(css|less|sass|scss)$/ })],
     }),
     new CopyPlugin({
-      patterns: copy,
+      patterns: copy ?? [],
     }),
     new WebpackBar(),
   ].filter((item) => !!item);
@@ -216,7 +218,7 @@ const makeTsLoadRule = (): RuleSetRule => {
 const makeGlslLoadRule = (): RuleSetRule => {
   return {
     test: /\.glsl$/,
-    loader: "webpack-glsl-loader",
+    loader: "raw-loader",
   };
 };
 
