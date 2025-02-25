@@ -81,5 +81,13 @@
     "webpack-dev-server": "^5.0.2",
     "webpack-livereload-plugin": "github:satoshionoda/webpack-livereload-plugin#ignore-hash-comparison",
     "webpackbar": "^6.0.1"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "cwebp-bin",
+      "gifsicle",
+      "mozjpeg",
+      "pngquant-bin"
+    ]
   }
 }
