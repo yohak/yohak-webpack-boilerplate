@@ -16,8 +16,11 @@ import type {
   WebpackPluginInstance,
 } from "webpack";
 import type { Configuration as DevServerConfiguration } from "webpack-dev-server";
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const BrowserSyncPlugin = require("browser-sync-webpack-plugin");
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const PugPlugin = require("pug-plugin");
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const LiveReloadPlugin = require("webpack-livereload-plugin");
 
 // const WebpackBar = require("webpackbar");
@@ -158,7 +161,7 @@ const makePlugins = ({ copy, server, clean, output }: ConfigProps): WebpackPlugi
       })
     : undefined;
   //
-  const liveReload = !!server.liveReloadPlugin
+  const liveReload = server.liveReloadPlugin
     ? new LiveReloadPlugin({ delay: 100, useCompilationHash: false })
     : undefined;
 
@@ -188,6 +191,7 @@ const loadPugData = ({ data, src }: PugConf): any => {
   let result = {};
   data.forEach((str) => {
     const path = join(src, str);
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     const data = require(path);
     result = { ...result, ...data };
   });
