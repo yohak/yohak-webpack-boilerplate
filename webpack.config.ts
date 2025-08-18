@@ -13,6 +13,9 @@ export default makeConfig({
   server: {
     root: DIR_PUBLIC,
     watch: `${DIR_SRC}/**/*.*`,
+    browserSync: {
+      ghostMode: false,
+    },
   },
   pug: {
     src: join(DIR_SRC, "pug"),
