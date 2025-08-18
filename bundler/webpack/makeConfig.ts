@@ -256,6 +256,11 @@ const makeSassLoadRule = (): RuleSetRule => {
       },
       {
         loader: "sass-loader",
+        options: {
+          sassOptions: {
+            silenceDeprecations: ["mixed-decls", "legacy-js-api"],
+          },
+        }
       },
     ],
   };
