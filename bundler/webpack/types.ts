@@ -47,11 +47,6 @@ export type ConfigProps = {
      */
     port?: number;
     /**
-     * LiveReloadPluginを発火するかどうか。WordPressなど別のサーバーを起動しているときに便利。
-     * @default false
-     */
-    liveReloadPlugin?: boolean;
-    /**
      * 自動更新時の監視対象。(絶対パスベースのglob形式)
      */
     watch: string;

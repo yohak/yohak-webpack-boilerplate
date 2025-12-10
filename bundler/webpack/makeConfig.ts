@@ -20,8 +20,6 @@ import type { Configuration as DevServerConfiguration } from "webpack-dev-server
 const BrowserSyncPlugin = require("browser-sync-webpack-plugin");
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const PugPlugin = require("pug-plugin");
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-const LiveReloadPlugin = require("webpack-livereload-plugin");
 
 // const WebpackBar = require("webpackbar");
 type Output = Configuration["output"];
@@ -161,14 +159,8 @@ const makePlugins = ({ copy, server, clean, output }: ConfigProps): WebpackPlugi
       })
     : undefined;
   //
-  const liveReload = server.liveReloadPlugin
-    ? new LiveReloadPlugin({ delay: 100, useCompilationHash: false })
-    : undefined;
-
-  //
   return [
     browserSync,
-    liveReload,
     new CleanWebpackPlugin({
       verbose: clean?.verbose === undefined ? false : clean.verbose,
       dry: clean?.dry === undefined ? false : clean.dry,
@@ -260,7 +252,7 @@ const makeSassLoadRule = (): RuleSetRule => {
           sassOptions: {
             silenceDeprecations: ["mixed-decls", "legacy-js-api"],
           },
-        }
+        },
       },
     ],
   };

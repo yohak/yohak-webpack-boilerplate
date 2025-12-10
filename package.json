@@ -81,7 +81,6 @@
     "webpack": "^5.98.0",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.0.2",
-    "webpack-livereload-plugin": "github:satoshionoda/webpack-livereload-plugin#ignore-hash-comparison",
     "webpackbar": "^7.0.0"
   },
   "pnpm": {
