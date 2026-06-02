@@ -2,8 +2,10 @@ module.exports = {
   plugins: ["@prettier/plugin-pug", "@prettier/plugin-php"],
 
   semi: true,
-  trailingComma: "es5",
+  trailingComma: "all",
   singleQuote: false,
+  singleAttributePerLine: false,
+  htmlWhitespaceSensitivity: "ignore",
   tabWidth: 2,
   pugPrintWidth: 9999,
   printWidth: 100,
